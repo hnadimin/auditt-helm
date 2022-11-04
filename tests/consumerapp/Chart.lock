@@ -1,0 +1,6 @@
+dependencies:
+- name: audittail
+  repository: file://../../../audit-helm
+  version: 1.0.0
+digest: sha256:7d8fa5c58872ecb7ca3b161f263f7b33cea9b050594a4f9d40dde0d099471c3e
+generated: "2022-11-04T09:26:51.957358051Z"
