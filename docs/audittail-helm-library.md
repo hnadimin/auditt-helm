@@ -11,27 +11,31 @@ It may be used on your Deployment as follows:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  ...
+  name: test-app
+  labels:
+    app: k8s-app
 spec:
-  ...
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s
   template:
-    ...
+    metadata:
+      labels:
+        app: k8s
     spec:
       initContainers:
-        - {{ include audittail.initContainer" | ident 10}}
+        {{- include "audittail.initContainer" .| nindent 8 }}
       containers:
-        - image: MY_APP_IMAGE
+        - image: nging
+          name: nginx
           args:
-            - --audit-log-path={{ template "audittail.auditLogpath" }}
-          name: my-app
+            - --audit-log-path={{ template "audittail.auditLogPath" }}
           volumeMounts:
-            - {{ include "audittail.volumeMount" | ident 12 }}
-        # Mandatory: tails audit logs and outputs them to stdout
-        # for the Splunk forwarder to pick up
-        - {{ include "audittail.sidecarcontainer" | ident 10 }}
+            {{- include "audittail.volumeMount" . | nindent 12}}
+        {{- include "audittail.sidecarContainer" .| nindent 8 }}
       volumes:
-        - {{include "audittail.volume" | ident 10 }}
-
+        {{- include "audittail.volume" . | nindent 8}}
 ```
 
 Just include the audittail helm library chart in their dependencies as they can any other helm dependency.
@@ -41,7 +45,5 @@ Example:
 ---
 dependencies:
   - name: audittail
-    repository: https://<path to chart index>/audittail
-    tags:
-      - audit
-    version: 0.1.0
+    repository: https://github.com/hnadimin/auditt-helm
+    version: 1.0.0

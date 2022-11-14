@@ -31,11 +31,11 @@ An library to generate and write audit events.
 
 [Read more.](docs/auditevent.md)
 
-### `auditevent-helm-library`
+### `audittail-helm-library`
 
-An library to generate and write audit events.
+Helm library to use audittail container.
 
-[Read more.](docs/auditevent-helm-library.md)
+[Read more.](docs/audittail-helm-library.md)
 
 
 ### Gin middleware
