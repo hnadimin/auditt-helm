@@ -4,7 +4,7 @@ A library chart is a type of Helm chart that defines chart primitives or definit
 which can be shared by Helm templates in other charts.
 This allows users to share snippets of code that can be re-used across charts, avoiding repetition and keeping charts DRY.
 
-It may be used on your Deployment as follows:
+You can use audittail helm library to include audittail initcontainer, sidecarcontainer, volume configuration in application helm charts, like below:
 
 ```yaml
 ---
